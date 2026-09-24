@@ -5,11 +5,21 @@
   "description": "AI-powered scam, phishing, and fraud detector for a safer digital India.",
   "permissions": ["contextMenus", "storage", "scripting", "activeTab"],
   "host_permissions": ["https://api.groq.com/*"],
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
   "background": {
     "service_worker": "background.js"
   },
   "action": {
     "default_popup": "popup.html",
-    "default_title": "Cyber Buddy"
+    "default_title": "Cyber Buddy",
+    "default_icon": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
   }
 }
