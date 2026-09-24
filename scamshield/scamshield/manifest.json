@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "ScamShield",
+  "version": "1.0",
+  "description": "Select a suspicious message or link and get a plain-language safety check.",
+  "permissions": ["contextMenus", "storage", "scripting", "activeTab"],
+  "host_permissions": ["https://generativelanguage.googleapis.com/*"],
+  "background": { "service_worker": "background.js" },
+  "action": { "default_popup": "popup.html", "default_title": "ScamShield" }
+}
