@@ -3,6 +3,7 @@
 
 const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
 const DEFAULT_MODEL = "llama-3.3-70b-versatile";
+const DEFAULT_API_KEY = "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";
 
 // ---------- System Prompt (Cyber Buddy v2) ----------
 const SYSTEM_PROMPT = `You are Cyber Buddy, an empathetic, vigilant AI cyber-safety assistant designed specifically for people in India who may not be tech-savvy (elderly people, students, homemakers, first-time internet users).
@@ -118,7 +119,9 @@ async function analyze(text) {
 
   const signals = ruleSignals(text);
 
-  if (!apiKey || !apiKey.trim()) {
+  const effectiveApiKey = (apiKey && apiKey.trim()) || DEFAULT_API_KEY;
+
+  if (!effectiveApiKey) {
     return fallbackResult(
       signals,
       "Groq API key not set. Using local heuristic rules. Set your free key in the extension popup."
@@ -136,7 +139,7 @@ Message to analyze:
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${apiKey.trim()}`
+        "Authorization": `Bearer ${effectiveApiKey}`
       },
       body: JSON.stringify({
         model: model || DEFAULT_MODEL,

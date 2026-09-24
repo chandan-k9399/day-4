@@ -14,9 +14,13 @@ const VERDICT_THEMES = {
   "Likely scam": { bg: "#b91c1c", icon: "🚨" }
 };
 
+const DEFAULT_API_KEY = "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";
+
 // Load saved settings
 chrome.storage.local.get(["apiKey", "lang", "model"]).then(({ apiKey, lang, model }) => {
-  if (apiKey) $("apiKey").value = apiKey;
+  const currentKey = apiKey || DEFAULT_API_KEY;
+  $("apiKey").value = currentKey;
+  if (!apiKey) chrome.storage.local.set({ apiKey: DEFAULT_API_KEY });
   if (lang) $("lang").value = lang;
   if (model) $("model").value = model;
 });
